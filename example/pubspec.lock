@@ -152,9 +152,11 @@ packages:
   xmpp_rock:
     dependency: "direct dev"
     description:
-      path: ".."
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: ef7e895e420017c05ee9f2789bfa367332a622fa
+      url: "git://github.com/yellowmessenger/xmpp_rock.git"
+    source: git
     version: "0.0.1"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"

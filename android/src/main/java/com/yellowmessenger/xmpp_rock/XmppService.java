@@ -61,6 +61,16 @@ public class XmppService {
     private boolean chat_created;
     private boolean loggedin;
     StanzaFilter packetFilter = new StanzaTypeFilter(Message.class);
+    private static XmppService xmppServiceInstance;
+
+    private XmppService(){}
+
+    public static XmppService getInstance(){
+        if(xmppServiceInstance == null){
+            xmppServiceInstance = new XmppService();
+        }
+        return xmppServiceInstance;
+    }
 
 
 
@@ -105,9 +115,13 @@ public class XmppService {
                     if (packet instanceof Message) {
                         Message message = (Message) packet;
                         Jid sender = message.getFrom();
-                        Log.d("Received message:", " "
-                                + (message != null ? message.getBody() : "NULL"));
-                        MyBus.getInstance().bus().send((message != null ? message.getBody() : "{\"data\": null}"));
+                        if(!message.getBodies().isEmpty() && message.getBodies().toArray().length > 0){
+                            Log.d("Received message:", " "
+                                    + (((Message.Body)(message.getBodies().toArray()[0])).getMessage()  != null ? ((Message.Body)(message.getBodies().toArray()[0])).getMessage() : "NULL"));
+
+                            MyBus.getInstance().bus().send((((Message.Body)(message.getBodies().toArray()[0])).getMessage() != null ?((Message.Body)(message.getBodies().toArray()[0])).getMessage() : "{\"data\": null}"));
+
+                        }
                     }
                 }
             }, packetFilter);

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-// import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:xmpp_rock/xmpp_rock.dart';
 
 void main() => runApp(App());
@@ -275,7 +275,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   File _image;
-  // final picker = ImagePicker();
+  final picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -308,29 +308,31 @@ class _MyAppState extends State<MyApp> {
                     label: Text(_xmppReady ? "Connected" : "Disconnected"))
               ],
             ),
-            // Container(
-            //   height: 100,
-            //   width: 100,
-            //   child: Center(
-            //     child: _image == null
-            //         ? Text('No image selected.')
-            //         : Image.file(_image),
-            //   ),
-            // ),
-            // IconButton(
-            //     icon: Icon(Icons.upload_file),
-            //     onPressed: () async {
-            //       final pickedFile =
-            //           await picker.getImage(source: ImageSource.camera);
-            //
-            //       setState(() {
-            //         if (pickedFile != null) {
-            //           _image = File(pickedFile.path);
-            //         } else {
-            //           print('No image selected.');
-            //         }
-            //       });
-            //     }),
+            Container(
+              height: 100,
+              width: 100,
+              child: Center(
+                child: _image == null
+                    ? Text('No image selected.')
+                    : Image.file(_image),
+              ),
+            ),
+            IconButton(
+                icon: Icon(Icons.upload_file),
+                onPressed: () async {
+                  disconnect();
+                  final pickedFile =
+                      await picker.getImage(source: ImageSource.camera);
+
+                  setState(() {
+                    if (pickedFile != null) {
+                      _image = File(pickedFile.path);
+                    } else {
+                      print('No image selected.');
+                    }
+                    initXmpp();
+                  });
+                }),
             _controlForm(),
             Divider(),
             Text('Stream Response', style: TextStyle(fontSize: 20)),

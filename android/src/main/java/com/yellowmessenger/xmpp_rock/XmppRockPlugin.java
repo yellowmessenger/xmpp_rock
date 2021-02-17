@@ -61,6 +61,8 @@ public class XmppRockPlugin implements FlutterPlugin, MethodCallHandler, EventCh
             result.success(initXMPP(mContext, fullJid, xmppPassword, port));
 
         } else  if (call.method.equals("closeConnection")) {
+            android.util.Log.d(TAG, "called from  Flutter method channel");
+
             result.success(closeConnetion());
 
         }
@@ -78,6 +80,8 @@ public class XmppRockPlugin implements FlutterPlugin, MethodCallHandler, EventCh
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        android.util.Log.d(TAG, "called from  detached engine");
+
         closeConnetion();
     }
 
@@ -101,6 +105,7 @@ public class XmppRockPlugin implements FlutterPlugin, MethodCallHandler, EventCh
 
     @Override
     public void onCancel(Object arguments) {
+        android.util.Log.d(TAG, "called from  event channel onCancel");
         closeConnetion();
     }
 

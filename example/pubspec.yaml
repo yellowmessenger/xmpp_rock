@@ -18,13 +18,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # xmpp_rock:
-  #   path: ../
-
-
   xmpp_rock:
-    git:
-      url: git://github.com/yellowmessenger/xmpp_rock.git
+    path: ../
+
+
+  # xmpp_rock:
+  #   git:
+  #     url: git://github.com/yellowmessenger/xmpp_rock.git
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

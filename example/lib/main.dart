@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
 //   flutter: user_1603256907680@xmpp.yellowmssngr.com
 // flutter: fNPPbwQc2fzo
 
-  String uid = "user_1594396759145@xmpp.yellowmssngr.com";
+  String uid = "user_1594396759145@xmpp.yellowmssngr.com/agentappsdk";
   String password = "JfJblF7iPpKo";
 
   Future<void> initXmpp() async {

@@ -52,6 +52,7 @@ public class XmppService {
     private String JID = "";
     private String userName = "";
     private String passWord = "";
+    private  String resource = "";
     AbstractXMPPConnection connection;
     ChatManager chatmanager;
     Chat newChat;
@@ -85,6 +86,8 @@ public class XmppService {
         this.passWord = pwd;
         this.PORT = port;
         this.HOST = DOMAIN;
+        this.resource = XmppStringUtils.parseResource(JID);
+
 
         XMPPTCPConnectionConfiguration.Builder configBuilder = XMPPTCPConnectionConfiguration.builder();
         configBuilder.setUsernameAndPassword(userName, passWord);
@@ -92,6 +95,7 @@ public class XmppService {
         configBuilder.setXmppDomain(DOMAIN);
         configBuilder.setHost(HOST);
         configBuilder.setPort(PORT);
+        configBuilder.setResource(resource);
         configBuilder.setSendPresence(true);
         configBuilder.setConnectTimeout(10000);
         configBuilder.setSocketFactory(SSLSocketFactory.getDefault());
